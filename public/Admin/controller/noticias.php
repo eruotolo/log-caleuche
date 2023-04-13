@@ -35,7 +35,7 @@ if (mysqli_query($link, $sql)) {
     }
 
     // Redirigir a la página de éxito
-    header("Location: ../app-news-list.php");
+    header("Location: ../apps-news-list.php");
 } else {
     echo "Error al guardar la noticia: " . mysqli_error($link);
 }

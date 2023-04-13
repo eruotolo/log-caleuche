@@ -8,7 +8,7 @@
                         <img src="assets/images/logo-sm.svg" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Panel Admin</span>
+                        <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Intranet</span>
                     </span>
                 </a>
 
@@ -17,7 +17,7 @@
                         <img src="assets/images/logo-sm.svg" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Minia</span>
+                        <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Intranet</span>
                     </span>
                 </a>
             </div>
@@ -80,15 +80,19 @@
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 
-                    <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
+                    <img class="rounded-circle header-profile-user" src="uploads/usuarios/<?php echo $_SESSION['image']; ?>"
                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1 fw-medium"><?php echo $language["Shawn_L"]; ?>.</span>
+                    <span class="d-none d-xl-inline-block ms-1 fw-medium"><?php echo $_SESSION['name']; ?> <?php echo $_SESSION['lastname']; ?></span>
+
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
 
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
                     <a class="dropdown-item" href="apps-contacts-profile.php"><i class="mdi mdi-face-man font-size-16 align-middle me-1"></i> <?php echo $language["Profile"]; ?></a>
+
+                    <a class="dropdown-item" href="" data-key="t-recover-password"  data-bs-toggle="modal" data-bs-target="#change-password"><i class='bx bx-reset font-size-16 align-middle me-1'></i><?php echo $language["Recover_Password"]; ?></a>
+
                     <a class="dropdown-item" href="auth-lock-screen.php"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> <?php echo $language["Lock_screen"]; ?> </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="logout.php"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> <?php echo $language["Logout"]; ?></a>
@@ -125,8 +129,14 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="apps-news-list.php" data-key="t-news-list"><?php echo $language["News_List"]; ?></a></li>
-                        <li><a href="apps-news-new.php" data-key="t-news-new"><?php echo $language["News_New"]; ?></a></li>
-                        <li><a href="apps-news-cat.php" data-key="t-news-new"><?php echo $language["News_Cat"]; ?></a></li>
+                        <?php
+                        if ($_SESSION['category'] == 2 || $_SESSION['category'] == 1) {
+                            ?>
+                            <li><a href="apps-news-new.php" data-key="t-news-new"><?php echo $language["News_New"]; ?></a></li>
+                            <li><a href="apps-news-cat.php" data-key="t-news-new"><?php echo $language["News_Cat"]; ?></a></li>
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </li>
 
@@ -137,198 +147,74 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="apps-contacts-list.php" data-key="t-user-list"><?php echo $language["User_List"]; ?></a></li>
-                        <!--<li><a href="apps-contacts-grid.php" data-key="t-user-grid"><?php echo $language["User_Grid"]; ?></a></li>-->
-                        <li><a href="apps-contacts-profile.php" data-key="t-profile"><?php echo $language["Profile"]; ?></a></li>
+                        <?php
+                        if ($_SESSION['category'] == 2 || $_SESSION['category'] == 1) {
+                        ?>
                         <li><a href="apps-contacts-register.php" data-key="t-register"><?php echo $language["Register"]; ?></a></li>
-                        <li><a href="pages-recoverpw.php" data-key="t-recover-password"><?php echo $language["Recover_Password"]; ?></a></li>
+                            <?php
+                        }
+                        ?>
+
                     </ul>
                 </li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="grid"></i>
-                        <span data-key="t-apps"><?php echo $language["Apps"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li>
-                            <a href="apps-calendar.php">
-                                <span data-key="t-calendar"><?php echo $language["Calendar"]; ?></span>
-                            </a>
-                        </li>
-        
-                        <li>
-                            <a href="apps-chat.php">
-                                <span data-key="t-chat"><?php echo $language["Chat"]; ?></span>
-                            </a>
-                        </li>
-        
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow">
-                                <span data-key="t-email"><?php echo $language["Email"]; ?></span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="apps-email-inbox.php" data-key="t-inbox"><?php echo $language["Inbox"]; ?></a></li>
-                                <li><a href="apps-email-read.php" data-key="t-read-email"><?php echo $language["Read_Email"]; ?></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow">
-                                <span data-key="t-invoices"><?php echo $language["Invoices"]; ?></span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="apps-invoices-list.php" data-key="t-invoice-list"><?php echo $language["Invoice_List"]; ?></a></li>
-                                <li><a href="apps-invoices-detail.php" data-key="t-invoice-detail"><?php echo $language["Invoice_Detail"]; ?></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" class="">
-                                <span data-key="t-blog"><?php echo $language["Blog"]; ?></span>
-                                <span class="badge rounded-pill badge-soft-danger float-end" key="t-new"><?php echo $language["New"]; ?></span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="apps-blog-grid.php" data-key="t-blog-grid"><?php echo $language["Blog_Grid"]; ?></a></li>
-                                <li><a href="apps-blog-list.php" data-key="t-blog-list"><?php echo $language["Blog_List"]; ?></a></li>
-                                <li><a href="apps-blog-detail.php" data-key="t-blog-details"><?php echo $language["Blog_Details"]; ?></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="file-text"></i>
-                        <span data-key="t-pages"><?php echo $language["Pages"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="pages-starter.php" data-key="t-starter-page"><?php echo $language["Starter_Page"]; ?> </a></li>
-                        <li><a href="pages-maintenance.php" data-key="t-maintenance"><?php echo $language["Maintenance"]; ?></a></li>
-                        <li><a href="pages-comingsoon.php" data-key="t-coming-soon"><?php echo $language["Coming_Soon"]; ?></a></li>
-                        <li><a href="pages-timeline.php" data-key="t-timeline"><?php echo $language["Timeline"]; ?></a></li>
-                        <li><a href="pages-faqs.php" data-key="t-faqs"><?php echo $language["FAQs"]; ?></a></li>
-                        <li><a href="pages-pricing.php" data-key="t-pricing"><?php echo $language["Pricing"]; ?></a></li>
-                        <li><a href="pages-404.php" data-key="t-error-404"><?php echo $language["Error_404"]; ?></a></li>
-                        <li><a href="pages-500.php" data-key="t-error-500"><?php echo $language["Error_500"]; ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="layouts-horizontal.php">
-                        <i data-feather="layout"></i>
-                        <span data-key="t-horizontal"><?php echo $language["Horizontal"]; ?></span>
-                    </a>
-                </li>
 
                 <li class="menu-title mt-2" data-key="t-components"><?php echo $language["Elements"]; ?></li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="briefcase"></i>
-                        <span data-key="t-components"><?php echo $language["Components"]; ?></span>
+                    <a href="javascript: void(0);" class="has-arrow iconos-menu">
+                        <i class='bx bx-dice-3'></i>
+                        <span data-key="t-aprendiz"><?php echo $language["Aprendiz"]; ?></span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.php" data-key="t-alerts"><?php echo $language["Alerts"]; ?></a></li>
-                        <li><a href="ui-buttons.php" data-key="t-buttons"><?php echo $language["Buttons"]; ?></a></li>
-                        <li><a href="ui-cards.php" data-key="t-cards"><?php echo $language["Cards"]; ?></a></li>
-                        <li><a href="ui-carousel.php" data-key="t-carousel"><?php echo $language["Carousel"]; ?></a></li>
-                        <li><a href="ui-dropdowns.php" data-key="t-dropdowns"><?php echo $language["Dropdowns"]; ?></a></li>
-                        <li><a href="ui-grid.php" data-key="t-grid"><?php echo $language["Grid"]; ?></a></li>
-                        <li><a href="ui-images.php" data-key="t-images"><?php echo $language["Images"]; ?></a></li>
-                        <li><a href="ui-modals.php" data-key="t-modals"><?php echo $language["Modals"]; ?></a></li>
-                        <li><a href="ui-offcanvas.php" data-key="t-offcanvas"><?php echo $language["Offcanvas"]; ?></a></li>
-                        <li><a href="ui-progressbars.php" data-key="t-progress-bars"><?php echo $language["Progress_Bars"]; ?></a></li>
-                        <li><a href="ui-tabs-accordions.php" data-key="t-tabs-accordions"><?php echo $language["Tabs_n_Accordions"]; ?></a></li>
-                        <li><a href="ui-typography.php" data-key="t-typography"><?php echo $language["Typography"]; ?></a></li>
-                        <li><a href="ui-video.php" data-key="t-video"><?php echo $language["Video"]; ?></a></li>
-                        <li><a href="ui-general.php" data-key="t-general"><?php echo $language["General"]; ?></a></li>
-                        <li><a href="ui-colors.php" data-key="t-colors"><?php echo $language["Colors"]; ?></a></li>
+                        <li><a href="apps-aprendiz-trazados.php" data-key="t-aprendiz"><?php echo $language["Aprendiz_Trazados"]; ?></a></li>
+                        <li><a href="apps-aprendiz-actas.php" data-key="t-aprendiz"><?php echo $language["Aprendiz_Actas"]; ?></a></li>
+                        <li><a href="apps-aprendiz-biblioteca.php" data-key="t-aprendiz"><?php echo $language["Aprendiz_Biblioteca"]; ?></a></li>
+                        <li><a href="apps-aprendiz-boletin.php" data-key="t-aprendiz"><?php echo $language["Aprendiz_Boletin"]; ?></a></li>
+
                     </ul>
                 </li>
+
+                <?php
+                if ($_SESSION['grado'] == 3 || $_SESSION['username'] == 'eruotolo' || $_SESSION['grado'] == 2 ) {
+                ?>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="gift"></i>
-                        <span data-key="t-ui-elements"><?php echo $language["Extended"]; ?></span>
+                    <a href="javascript: void(0);" class="has-arrow iconos-menu">
+                        <i class='bx bx-dice-5' ></i>
+                        <span data-key="t-aprendiz"><?php echo $language["Companeros"]; ?></span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="extended-lightbox.php" data-key="t-lightbox"><?php echo $language["Lightbox"]; ?></a></li>
-                        <li><a href="extended-rangeslider.php" data-key="t-range-slider"><?php echo $language["Range_Slider"]; ?></a></li>
-                        <li><a href="extended-sweet-alert.php" data-key="t-sweet-alert"><?php echo $language["SweetAlert_2"]; ?></a></li>
-                        <li><a href="extended-session-timeout.php" data-key="t-session-timeout"><?php echo $language["Session_Timeout"]; ?></a></li>
-                        <li><a href="extended-rating.php" data-key="t-rating"><?php echo $language["Rating"]; ?></a></li>
-                        <li><a href="extended-notifications.php" data-key="t-notifications"><?php echo $language["Notifications"]; ?></a></li>
+                        <li><a href="apps-companero-trazados.php" data-key="t-aprendiz"><?php echo $language["Companeros_Trazados"]; ?></a></li>
+                        <li><a href="apps-companero-actas.php" data-key="t-aprendiz"><?php echo $language["Companeros_Actas"]; ?></a></li>
+                        <li><a href="apps-companero-biblioteca.php" data-key="t-aprendiz"><?php echo $language["Companeros_Biblioteca"]; ?></a></li>
+                        <li><a href="apps-companero-boletin.php" data-key="t-aprendiz"><?php echo $language["Companeros_Boletin"]; ?></a></li>
                     </ul>
                 </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if ($_SESSION['grado'] == 3 || $_SESSION['username'] == 'eruotolo' ) {
+                ?>
 
                 <li>
-                    <a href="javascript: void(0);">
-                        <i data-feather="box"></i>
-                        <span class="badge rounded-pill badge-soft-danger  text-danger float-end">7</span>
-                        <span data-key="t-forms"><?php echo $language["Forms"]; ?></span>
+                    <a href="javascript: void(0);" class="has-arrow iconos-menu">
+                        <i class='bx bx-sun'></i>
+                        <span data-key="t-aprendiz"><?php echo $language["Maestros"]; ?></span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="form-elements.php" data-key="t-form-elements"><?php echo $language["Basic_Elements"]; ?></a></li>
-                        <li><a href="form-validation.php" data-key="t-form-validation"><?php echo $language["Validation"]; ?></a></li>
-                        <li><a href="form-advanced.php" data-key="t-form-advanced"><?php echo $language["Advanced_Plugins"]; ?></a></li>
-                        <li><a href="form-editors.php" data-key="t-form-editors"><?php echo $language["Editors"]; ?></a></li>
-                        <li><a href="form-uploads.php" data-key="t-form-upload"><?php echo $language["File_Upload"]; ?></a></li>
-                        <li><a href="form-wizard.php" data-key="t-form-wizard"><?php echo $language["Wizard"]; ?></a></li>
-                        <li><a href="form-mask.php" data-key="t-form-mask"><?php echo $language["Mask"]; ?></a></li>
+                        <li><a href="apps-maestro-trazados.php" data-key="t-aprendiz"><?php echo $language["Maestros_Trazados"]; ?></a></li>
+                        <li><a href="apps-maestro-actas.php" data-key="t-aprendiz"><?php echo $language["Maestros_Actas"]; ?></a></li>
+                        <li><a href="apps-maestro-biblioteca.php" data-key="t-aprendiz"><?php echo $language["Maestros_Biblioteca"]; ?></a></li>
+                        <li><a href="apps-maestro-boletin.php" data-key="t-aprendiz"><?php echo $language["Maestros_Boletin"]; ?></a></li>
                     </ul>
                 </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="sliders"></i>
-                        <span data-key="t-tables"><?php echo $language["Tables"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="tables-basic.php" data-key="t-basic-tables"><?php echo $language["Bootstrap_Basic"]; ?></a></li>
-                        <li><a href="tables-datatable.php" data-key="t-data-tables"><?php echo $language["DataTables"]; ?></a></li>
-                        <li><a href="tables-responsive.php" data-key="t-responsive-table"><?php echo $language["Responsive"]; ?></a></li>
-                        <li><a href="tables-editable.php" data-key="t-editable-table"><?php echo $language["Editable"]; ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="pie-chart"></i>
-                        <span data-key="t-charts"><?php echo $language["Charts"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="charts-apex.php" data-key="t-apex-charts"><?php echo $language["Apexcharts"]; ?></a></li>
-                        <li><a href="charts-echart.php" data-key="t-e-charts"><?php echo $language["Echarts"]; ?></a></li>
-                        <li><a href="charts-chartjs.php" data-key="t-chartjs-charts"><?php echo $language["Chartjs"]; ?></a></li>
-                        <li><a href="charts-knob.php" data-key="t-knob-charts"><?php echo $language["Jquery_Knob"]; ?></a></li>
-                        <li><a href="charts-sparkline.php" data-key="t-sparkline-charts"><?php echo $language["Sparkline"]; ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="cpu"></i>
-                        <span data-key="t-icons"><?php echo $language["Icons"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="icons-boxicons.php" data-key="t-boxicons"><?php echo $language["Boxicons"]; ?></a></li>
-                        <li><a href="icons-materialdesign.php" data-key="t-material-design"><?php echo $language["Material_Design"]; ?></a></li>
-                        <li><a href="icons-dripicons.php" data-key="t-dripicons"><?php echo $language["Dripicons"]; ?></a></li>
-                        <li><a href="icons-fontawesome.php" data-key="t-font-awesome"><?php echo $language["Font_Awesome_5"]; ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="map"></i>
-                        <span data-key="t-maps"><?php echo $language["Maps"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="maps-google.php" data-key="t-g-maps"><?php echo $language["Google"]; ?></a></li>
-                        <li><a href="maps-vector.php" data-key="t-v-maps"><?php echo $language["Vector"]; ?></a></li>
-                        <li><a href="maps-leaflet.php" data-key="t-l-maps"><?php echo $language["Leaflet"]; ?></a></li>
-                    </ul>
-                </li>
-
-
+                    <?php
+                }
+                ?>
 
             </ul>
 
@@ -337,3 +223,35 @@
     </div>
 </div>
 <!-- Left Sidebar End -->
+
+<-- MODAL CHANGE PASSWORD -->
+
+
+<div class="modal fade" id="change-password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            <form action="controller/password-update.php" method="POST">
+                <input type="hidden" name="id" id="id" value="<?php echo $_SESSION['id'] ?> ">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Nuevo Password:</label>
+                        <input type="password" class="form-control" placeholder="Ingrese password" name="password" required>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Confirmar Nuevo Password:</label>
+                        <input type="password" class="form-control" placeholder="Confirme su password" name="confirm_password" required>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="update" class="btn btn-primary w-md">Actualizar Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Listado de Noticias | Nueva Noticia</title>
+    <title><?php echo $titulo ?> | Nueva Noticias</title>
 
     <?php include 'layouts/head.php'; ?>
 

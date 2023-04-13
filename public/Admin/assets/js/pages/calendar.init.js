@@ -41,7 +41,7 @@ File: Calendar init js
                 }
             });
             var defaultEvents = [{
-                title: 'All Day Event',
+                title: 'All Day Events',
                 start: new Date(y, m, 1)
                 },
                 {

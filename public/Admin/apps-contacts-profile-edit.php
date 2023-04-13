@@ -1,7 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
 
-
 <?php
 include('layouts/config.php');
 session_start();
@@ -13,51 +12,12 @@ $query_run = mysqli_query($link, $query);
 if ($query_run) {
     //$usuario = array();
     while ($row  = mysqli_fetch_array($query_run)) {
-    //    $usuario = $row;
-?>
-
-
-<?php
-
-if(isset($_POST['update'])){
-    $name = $_POST['name'];
-    $lastname = $_POST['lastname'];
-    $username = $_POST['username'];
-    $useremail = $_POST['useremail'];
-    $category = $_POST['category'];
-    $password = $_POST['password'];
-    $hash = password_hash($password, PASSWORD_DEFAULT);
-
-
-    if(isset($_FILES['file']) && $_FILES["file"]["error"] == 0){
-        #file name with a random number so that similar dont get replaced
-        $pname = rand(1000, 10000) . "-" . $_FILES["file"]["name"];
-
-        #temporary file name to store file
-        $tname = $_FILES["file"]["tmp_name"];
-
-        #upload directory path
-        $uploads_dir = 'uploads/';
-
-        #TO move the uploaded file to specific location
-        move_uploaded_file($tname, $uploads_dir . '/' . $pname);
-
-        $query = "UPDATE users SET name='$name',lastname='$lastname',username='$username',useremail='$useremail',category='$category',password='$hash',image='$pname' WHERE id = $id";
-
-    }else{
-        $query = "UPDATE users SET name='$name',lastname='$lastname',username='$username',useremail='$useremail',category='$category',password='$hash'  WHERE id = $id";
-    }
-
-    $result = mysqli_query($link, $query);
-
-    echo '<script> alert ("Actualizado")</script>';
-    header('Location: apps-contacts-list.php');
-}
+    //$usuario = $row;
 ?>
 
 <head>
 
-    <title>Editar Perfil de usuario |  Admin & Dashboard Template</title>
+    <title><?php echo $titulo ?> | Editar Perfil de Hermano</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 
@@ -82,12 +42,12 @@ if(isset($_POST['update'])){
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Perfil</h4>
+                            <h4 class="mb-sm-0 font-size-18">Editar Perfil de Información</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="apps-contacts-list.php">Usuarios</a></li>
-                                    <li class="breadcrumb-item active">Perfil</li>
+                                    <li class="breadcrumb-item"><a href="apps-contacts-list.php">Hermanos</a></li>
+                                    <li class="breadcrumb-item active">Editar información</li>
                                 </ol>
                             </div>
 
@@ -100,74 +60,112 @@ if(isset($_POST['update'])){
                     <div class="col-xl-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">ACTUALIZACIÓN INFORMACIÓN USUARIO</h4>
-                                <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
-                                    textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p>
+                                <h4 class="card-title">ACTUALIZACIÓN INFORMACIÓN DEL Q:.H:.</h4>
+                                <p class="card-title-desc">Los campos con <code>*</code> son campos requeridos/obligatorios.</p>
                             </div>
                             <div class="card-body">
                                 <!-- ACA COMIENZA EL FORM-->
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="controller/usuario-update.php" method="POST" enctype="multipart/form-data">
+
                                     <div class="row">
                                         <input type="hidden" name="id" id="id" value="<?php echo $row['id'] ?> ">
-                                        <div class="col-2 justify-content-center align-items-center">
-                                            <div class="avatar-xl me-3">
-                                                <img src="uploads/<?php echo $row['image']?>" alt="Imagen de Perfil" class="img-fluid rounded-circle d-block">
-                                                <input type="file" class="form-control" id="file" name="file" style="width: 148px; margin-top: 10px">
-                                            </div>
+                                        <div class="col-2 justify-content-center align-items-center img-perfil">
+                                            <img src="uploads/usuarios/<?php echo $row['image']?>" alt="Imagen de Perfil" class="img-fluid rounded-circle d-block">
+                                            <input type="file" class="form-control" id="file" name="file" >
                                         </div>
-                                        <div class="col-5">
-                                            <div class="mb-3">
-                                                <label for="name">Nombre</label>
-                                                <input type="text" class="form-control" id="name" required name="name" value="<?php echo $row['name'] ?>">
 
+                                        <div class="col-5 info-personal">
+                                            <h3>Información Personal</h3>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="name">Nombre del Q:.H:.</label>
+                                                        <input type="text" class="form-control" id="name"  name="name" value="<?php echo $row['name'] ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="lastname">Apellido del Q:.H:.</label>
+                                                        <input type="text" class="form-control" id="lastname" required name="lastname" value="<?php echo $row['lastname']  ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="date_birthday">Fecha de cumpleaños </label>
+                                                        <input type="date" class="form-control" id="date_birthday"  name="date_birthday" value="<?php echo $row['date_birthday'] ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="phone">Teléfono </label>
+                                                        <input type="number" class="form-control" id="phone"  name="phone" value="<?php echo $row['phone']  ?>">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="username">Usuario</label>
-                                                <input type="text" class="form-control" id="username" required name="username" value="<?php echo $row['username']  ?>">
 
-                                            </div>
                                             <div class="mb-3">
-                                                <label for="category">Tipo de Usuario</label>
-                                                <select id="category" class="form-select"  name="category">
-                                                    <?php try {
-                                                        $sql = 'SELECT id_Cat, cat_Nombre FROM user_category';
-                                                        foreach ($link->query($sql) as $rowc) {
-                                                            if ($row['cat_Nombre']) {
-                                                                $selected = 'selected="selected"';
-                                                            } else {
-                                                                $selected = '';
-                                                            }
-                                                            ?>
-                                                            <option <?= $selected ?> value="<?= $rowc['id_Cat'] ?>"><?= $rowc['cat_Nombre'] ?></option>
-                                                            <?php
-                                                        }
-                                                    } catch (PDOException  $e) {
-                                                        echo "Error: " . $e;
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-5">
-                                            <div class="mb-3">
-                                                <label for="lastname">Apellido</label>
-                                                <input type="text" class="form-control" id="lastname" required name="lastname" value="<?php echo $row['lastname']  ?>">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="useremail">Email</label>
+                                                <label for="useremail">Email </label>
                                                 <div class="input-group">
                                                     <div class="input-group-text">@</div>
                                                     <input type="text" class="form-control" id="useremail" required name="useremail" value="<?php echo $row['useremail']  ?>">
-
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="password">Password</label>
-                                                <input type="password" class="form-control" id="password" required name="password" value="<?php echo $row['password'] ?>" aria-describedby="password-addon">
+                                                <label for="city">Ciudad</label>
+                                                <input type="text" class="form-control" id="city"  name="city" value="<?php echo $row['city']  ?>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="address">Dirección</label>
+                                                <input type="text" class="form-control" id="address"  name="address" value="<?php echo $row['address']  ?>">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-5 info-personal">
+                                            <h3>Datos Masonicos</h3>
+
+                                            <div class="mb-3">
+                                                <label for="grado">Grado</label>
+                                                <select name="grado" id="grado" class="form-select">
+                                                    <?php
+                                                    $sql = "SELECT * FROM grado";
+                                                    $result = mysqli_query($link, $sql);
+                                                    $grados = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                                                    foreach ($grados as $grado) { ?>
+                                                        <option value="<?php echo $grado['id']; ?>" <?php if ($grado['id'] == $row['grado']){ echo 'selected'; } ?>><?php echo $grado['grado_nombre']; ?></option>}
+                                                    <?php } ?>
+                                                </select>
                                             </div>
                                             <div class="mb-3">
+                                                <label for="oficialidad">Cargo en la Oficialidad</label>
+                                                <select name="oficialidad" id="oficialidad" class="form-select">
+                                                    <?php
+                                                    $sql = "SELECT * FROM oficiales";
+                                                    $result = mysqli_query($link, $sql);
+                                                    $oficialidad = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                                                    foreach ($oficialidad as $oficiales) { ?>
+                                                        <option value="<?php echo $oficiales['id_Oficial']; ?>" <?php if ($oficiales['id_Oficial'] == $row['oficialidad']){ echo 'selected'; } ?>><?php echo $oficiales['nombre_Oficial']; ?></option>}
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="date_initiation">Fecha de Iniciación </label>
+                                                <input type="date" class="form-control" id="date_initiation" name="date_initiation" value="<?php echo $row['date_initiation']  ?>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="date_salary">Fecha de Aumento de Salario</label>
+                                                <input type="date" class="form-control" id="date_salary" name="date_salary" value="<?php echo $row['date_salary']  ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="date_exalted">Fecha de Exaltación</label>
+                                                <input type="date" class="form-control" id="date_exalted" name="date_exalted" value="<?php echo $row['date_exalted']  ?>">
+                                            </div>
+
+                                            <div class="mb-3 btn-actualizar">
                                                 <button type="submit" name="update" class="btn btn-primary w-md">Actualizar</button>
                                             </div>
+
                                         </div>
                                     </div>
                                 </form>
@@ -213,9 +211,6 @@ if(isset($_POST['update'])){
 
 <?php
     }
-} else {
-    echo '<script> alert ("No se a guardado")</script>';
-    header('Location: apps-contacts-list.php');
 }
 ?>
 

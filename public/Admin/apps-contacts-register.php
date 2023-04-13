@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Listado de Usuario | Registro de Usuario</title>
+    <title><?php echo $titulo ?> | Registrar Nuevo Q:. H:.</title>
 
     <?php include 'layouts/head.php'; ?>
 
@@ -34,12 +34,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Registro de Usuario</h4>
+                        <h4 class="mb-sm-0 font-size-18">Registro de Q:. Hermano</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="apps-contacts-list.php">Usuarios</a></li>
-                                <li class="breadcrumb-item active">Registro de Usuario</li>
+                                <li class="breadcrumb-item"><a href="apps-contacts-list.php">Hermanos</a></li>
+                                <li class="breadcrumb-item active">Registro de Q:. Hermano</li>
                             </ol>
                         </div>
                     </div>
@@ -51,13 +51,12 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Formulario de Registro de Usuario</h4>
-                            <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
-                                textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p>
+                            <p class="card-title-desc">Los campos con <code>*</code> son campos requeridos/obligatorios.</p>
                         </div>
                         <div class="card-body p-4">
                             <h5 class="font-size-14 mb-4"><i class="mdi mdi-arrow-right text-primary me-1"></i> Ingresar datos en los campos</h5>
 
-                            <form class="needs-validation mt-4 pt-2" action="controller/usuarios.php" method="post" enctype="multipart/form-data">
+                            <form class="needs-validation mt-4 pt-2" action="controller/usuario-new.php" method="post" enctype="multipart/form-data">
                                 <div class="row mb-4">
                                     <label for="firstname" class="col-sm-3 col-form-label">Nombre</label>
                                     <div class="col-sm-5">
@@ -73,7 +72,8 @@
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="username" class="col-sm-3 col-form-label">Nombre de Usuario</label>
+                                    <label for="username" class="col-sm-3 col-form-label">Nombre de Usuario <br><i>Ej: Antonio Lopez, como: alopez</i></label>
+
                                     <div class="col-sm-5">
                                         <input type="text" class="form-control" id="username" placeholder="Ingrese su nombre de usuario" required name="username" value="<?php echo $username; ?>">
                                         <span class="text-danger"><?php echo $username_err; ?></span>
@@ -82,16 +82,19 @@
                                 <div class="row mb-4">
                                     <label for="useremail" class="col-sm-3 col-form-label">Email</label>
                                     <div class="col-sm-5">
-                                        <input type="email" class="form-control" id="useremail" placeholder="Ingrese su email" required name="useremail" value="<?php echo $useremail; ?>">
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                            <input type="email" class="form-control" id="useremail" placeholder="Ingrese su email" required name="useremail" value="<?php echo $useremail; ?>">
+                                        </div>
                                         <span class="text-danger"><?php echo $useremail_err; ?></span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label for="category" class="col-sm-3 col-form-label">Tipo de usuario</label>
                                     <div class="col-sm-5">
-                                        <select id="category" class="form-select"  name="category">
+                                        <select id="grado" class="form-select"  name="grado">
                                             <?php try {
-                                                $sql = 'SELECT id_Cat, cat_Nombre FROM user_category';
+                                                $sql = 'SELECT id, grado_Nombre FROM grado';
                                                 foreach ($link->query($sql) as $rowc) {
                                                     if ($row['cat_Nombre']) {
                                                         $selected = 'selected="selected"';
@@ -99,7 +102,7 @@
                                                         $selected = '';
                                                     }
                                                     ?>
-                                                    <option <?= $selected ?> value="<?= $rowc['id_Cat'] ?>"><?= $rowc['cat_Nombre'] ?></option>
+                                                    <option <?= $selected ?> value="<?= $rowc['id'] ?>"><?= $rowc['grado_Nombre'] ?></option>
                                                     <?php
                                                 }
                                             } catch (PDOException  $e) {
@@ -129,6 +132,10 @@
                                     <div class="col-sm-5">
                                         <input type="file" class="form-control" id="file" name="file">
                                     </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <input type="hidden" name="category" class="form-control" value="3">
+                                    <input type="hidden" name="estado" class="form-control" value="1">
                                 </div>
                                 <div class="row justify-content-end">
                                     <div class="col-sm-9">
@@ -172,6 +179,8 @@
 <script src="assets/js/pages/datatable-pages.init.js"></script>
 <!-- validation init -->
 <script src="assets/js/pages/validation.init.js"></script>
+<!-- password addon init -->
+<script src="assets/js/pages/pass-addon.init.js"></script>
 
 <script src="assets/js/app.js"></script>
 

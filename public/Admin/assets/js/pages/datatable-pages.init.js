@@ -12,5 +12,12 @@ $(document).ready(function() {
     $('.datatable').DataTable({
         responsive: false
     });
+
+    //$('.datatable').dataTable( {
+    //    "order": [[ 1, 'asc' ]],
+    //    "paging": false,
+    //    responsive: false
+    //} );
+
     $(".dataTables_length select").addClass('form-select form-select-sm');
 });

@@ -1,14 +1,14 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
 
-    <head>
+<head>
 
-        
-        <title>Lock Screen | Minia - Admin & Dashboard Template</title>
-        <?php include 'layouts/head.php'; ?>
-<?php include 'layouts/head-style.php'; ?>
+    <title><?php echo $titulo ?> | Bloqueo de sesión</title>
 
-    </head>
+    <?php include 'layouts/head.php'; ?>
+    <?php include 'layouts/head-style.php'; ?>
+
+</head>
 
 <?php include 'layouts/body.php'; ?>
         <div class="auth-page">

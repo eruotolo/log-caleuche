@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Listado de usuarios | Admin & Dashboard Template</title>
+    <title><?php echo $titulo ?> | Listado de Noticias</title>
 
     <?php include 'layouts/head.php'; ?>
 
@@ -66,7 +66,7 @@
                                         <a class="nav-link active" href="apps-contacts-list.php" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="apps-contacts-grid.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid"><i class="bx bx-grid-alt"></i></a>
+                                        <a class="nav-link" href="unused/apps-contacts-grid.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid"><i class="bx bx-grid-alt"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -93,7 +93,7 @@
                                 </div>
                             </th>
                             <th scope="col">Titulo</th>
-                            <th scope="col">Categoria</th>
+                            <th scope="col">Categoría</th>
                             <th scope="col">Usuario Creador</th>
                             <th scope="col">Fecha de Creación</th>
                             <th style="width: 80px; min-width: 80px;">Acción</th>
@@ -136,8 +136,8 @@
                                             <i class="bx bx-dots-horizontal-rounded"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="../admin/apps-news-edit.php?id=<?php echo $row['id_Noticia'] ?>">Editar</a></li>
-                                            <li><a class="dropdown-item" href="../admin/controller/usuarios.php?id=<?php echo $row['id_Noticia'] ?>">Eliminar</a></li>
+                                            <li><a class="dropdown-item" href="../admin/apps-news-edit.php?id_Noticia=<?php echo $row['id_Noticia'] ?>">Editar</a></li>
+                                            <li><a class="dropdown-item" href="../admin/controller/delet-noticias.php?id=<?php echo $row['id_Noticia'] ?>">Eliminar</a></li>
                                         </ul>
                                     </div>
                                 </td>

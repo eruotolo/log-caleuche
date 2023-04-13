@@ -14,10 +14,10 @@
     $language['User_Grid'] = "Cuadrícula de usuario";
     $language['User_List'] = "Lista de usuarios";
     $language['Profile'] = "Perfil";
-    $language['Authentication'] = "Autenticación";
+    $language['Authentication'] = "Gestión de QQHH:.";
     $language['Login'] = "Acceso";
-    $language['Register'] = "Registrarse";
-    $language['Recover_Password'] = "Recuperar contraseña";
+    $language['Register'] = "Nuevo Usuario";
+    $language['Recover_Password'] = "Cambiar contraseña";
     $language['Lock_Screen'] = "Bloquear pantalla";
     $language['Confirm_Mail'] = "Confirmar correo";
     $language['Email_Verification'] = "verificacion de email";
@@ -120,4 +120,24 @@
     $language['News_List'] = "Listado Noticias";
     $language['News_New'] = "Nueva Noticia";
     $language['News_Cat'] = "Categoría de Noticia";
+    $language['Aprendiz'] = "Aprendices";
+    $language['Aprendiz_Trazados'] = "Trazados Aprendices";
+    $language['Aprendiz_Actas'] = "Actas Aprendices";
+    $language['Aprendiz_Biblioteca'] = "Biblioteca Aprendices";
+    $language['Aprendiz_Boletin'] = "Boletín Aprendices";
+
+
+    $language['Companeros'] = "Compañeros";
+    $language['Companeros_Trazados'] = "Trazados Compañeros";
+    $language['Companeros_Actas'] = "Actas Compañeros";
+    $language['Companeros_Biblioteca'] = "Biblioteca Compañeros";
+    $language['Companeros_Boletin'] = "Boletín Compañeros";
+
+    $language['Maestros'] = "Maestros";
+    $language['Maestros_Trazados'] = "Trazados Maestros";
+    $language['Maestros_Actas'] = "Actas Maestros";
+    $language['Maestros_Biblioteca'] = "Biblioteca Maestros";
+    $language['Maestros_Boletin'] = "Boletín Maestros";
+
+
 ?>
