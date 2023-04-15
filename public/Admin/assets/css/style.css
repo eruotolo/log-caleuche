@@ -23,3 +23,30 @@
 #change-password{
     margin-top: 100px;
 }
+.tabla-perfil tbody tr{
+    border: none !important;
+}
+.tabla-perfil > tbody > tr > td{
+    border: none !important;
+}
+.item-perfil{
+    padding-top: 20px;
+}
+
+.saludar > a > svg{
+    width: 50px;
+    height: 20px;
+    color: #5156be
+}
+.event-titulo{
+    font-size: 15px;
+    margin-bottom: 1px;
+}
+.event-fecha,
+.event-date{
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.evento-fecha span{
+    font-size: 18px;
+}

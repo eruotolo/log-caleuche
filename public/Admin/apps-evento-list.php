@@ -4,7 +4,7 @@
 
 <head>
 
-    <title><?php echo $titulo ?> | Trazados</title>
+    <title><?php echo $titulo ?> | Listado de Eventos</title>
 
     <?php include 'layouts/head.php'; ?>
 
@@ -15,6 +15,7 @@
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <?php include 'layouts/head-style.php'; ?>
+
 
 </head>
 
@@ -28,20 +29,21 @@
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
-
     <div class="main-content">
+
         <div class="page-content">
             <div class="container-fluid">
+
                 <!-- start page title -->
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Listado de Actas QQ:.HH:. Compañeros</h4>
+                            <h4 class="mb-sm-0 font-size-18">Listado de Eventos</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Actas</a></li>
-                                    <li class="breadcrumb-item active">Listado de Actas</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Eventos</a></li>
+                                    <li class="breadcrumb-item active">Listado de eventos</li>
                                 </ol>
                             </div>
 
@@ -49,6 +51,7 @@
                     </div>
                 </div>
                 <!-- end page title -->
+
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -58,29 +61,19 @@
 
                     <div class="col-md-6">
                         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                            <div>
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="apps-aprendiz-actas.php" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
-                                    </li>
-                                    <!--<li class="nav-item">
-                                        <a class="nav-link" href="apps-contacts-grid.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid"><i class="bx bx-grid-alt"></i></a>
-                                    </li>-->
-                                </ul>
-                            </div>
 
                             <!-- VIEW ONLY ADMIN USER-->
                             <?php
                             if ($_SESSION['category'] == 2 || $_SESSION['username'] == 'eruotolo'){
                                 ?>
                                 <div>
-                                    <a href="apps-actas-new.php" class="btn btn-light"><i class="bx bx-plus me-1"></i> Nueva Acta</a>
+                                    <a href="apps-evento-new.php" class="btn btn-light"><i class="bx bx-plus me-1"></i> Nuevo Evento</a>
                                 </div>
                                 <?php
                             } else{
                                 ?>
                                 <div>
-                                    <a href="" class="btn btn-light disabled" =""><i class="bx bx-plus me-1"></i> Nueva Acta</a>
+                                    <a href="" class="btn btn-light disabled" =""><i class="bx bx-plus me-1"></i> Nuevo Evento</a>
                                 </div>
                                 <?php
                             }
@@ -89,6 +82,7 @@
 
                     </div>
                 </div>
+                <!-- end row -->
 
                 <div class="table-responsive mb-4">
                     <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
@@ -100,16 +94,18 @@
                                     <label class="form-check-label" for="checkAll"></label>
                                 </div>
                             </th>
-                            <th scope="col">Nombre Acta</th>
-                            <th scope="col">Fecha Acta</th>
+                            <th scope="col">Nombre evento</th>
+                            <th scope="col">Titulo del evento</th>
+                            <th scope="col">Fecha del evento</th>
+                            <th scope="col">Categoría del evento</th>
                             <th style="width: 80px; min-width: 80px;">Acción</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                        $query ="SELECT * FROM acta A
-                                    JOIN grado G on A.grado_Acta = G.id
-                                    WHERE grado_Acta = 2";
+                        $query ="SELECT * FROM evento E
+                                 JOIN categoryevent CE on E.cat_Evento = CE.id_Category
+                                 WHERE estado_Evento = 1 and fecha_Evento > NOW() ORDER BY fecha_Evento ASC LIMIT 100";
                         $result_task = mysqli_query($link, $query);
                         while ($row = mysqli_fetch_Array($result_task))  {
 
@@ -121,20 +117,20 @@
                                         <label class="form-check-label" for="contacusercheck1"></label>
                                     </div>
                                 </th>
-                                <td><b><?php echo $row['name_Acta'] ?></b></td>
-                                <td><?php echo date("d/m/Y", strtotime($row['fecha_Acta'])); ?></td>
+                                <td><b><?php echo $row['nombre_Evento'] ?></b></td>
+                                <td><?php echo $row['trabajo_Evento'] ?></td>
+                                <td><?php echo date("d/m/Y", strtotime($row['fecha_Evento'])); ?></td>
+                                <td><?php echo $row['nombre_Category'] ?></td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="bx bx-dots-horizontal-rounded"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="apps-actas-view.php?id_Acta=<?php echo $row['id_Acta'] ?>">Ver</a></li>
-
                                             <?php
                                             if ($_SESSION['category'] == 2 || $_SESSION['username'] == 'eruotolo'){
                                                 ?>
-                                                <li><a class="dropdown-item" href="../Admin/controller/acta-remove.php?id_Acta=<?php echo $row['id_Acta'] ?>">Eliminar</a></li>
+                                                <li><a class="dropdown-item" href="../admin/controller/evento-remove.php?id_Evento=<?php echo $row['id_Evento'] ?>">Eliminar</a></li>
                                                 <?php
                                             } else{
                                                 ?>
@@ -145,22 +141,24 @@
                                         </ul>
                                     </div>
                                 </td>
-
                             </tr>
                             <?php
                         }
                         ?>
                         </tbody>
                     </table>
+                    <!-- end table -->
                 </div>
+                <!-- end table responsive -->
 
-            </div>
+            </div> <!-- container-fluid -->
         </div>
-    </div>
+        <!-- End Page-content -->
 
-    <!-- ============================================================== -->
-    <!-- End right Content here -->
-    <!-- ============================================================== -->
+
+        <?php include 'layouts/footer.php'; ?>
+    </div>
+    <!-- end main content-->
 
 </div>
 <!-- END layout-wrapper -->

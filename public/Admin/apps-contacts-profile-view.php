@@ -69,183 +69,254 @@ if ($query_run) {
                         <div class="row">
                             <div class="col-xl-12 col-lg-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">INFORMACIÓN del Q:. H:.</h4>
-                                    </div>
                                     <div class="card-body">
-                                        <!-- ACA COMIENZA LA INFORMACIÓN DEL Q:. H:.-->
                                         <div class="row">
-                                            <div class="col-2">
-                                                <img src="uploads/usuarios/<?php echo $row['image'] ?>"
-                                                     alt="Imagen de Perfil" class="img-fluid rounded-circle d-block">
+                                            <div class="col-sm order-2 order-sm-1">
+                                                <div class="d-flex align-items-start mt-3 mt-sm-0">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar-xl me-3">
+                                                            <img src="uploads/usuarios/<?php echo $row['image']; ?>" alt="" class="img-fluid rounded-circle d-block">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 item-perfil">
+                                                        <div>
+                                                            <h5 class="font-size-16 mb-1"><?php echo $row['name']; ?> <?php echo $row['lastname']; ?></h5>
+                                                            <?php
+                                                            if ($row['grado'] == 1){
+                                                                ?>
+                                                                <p class="text-muted font-size-13">Aprendiz</p>
+                                                                <?php
+                                                            }elseif ($row['grado'] == 2){
+                                                                ?>
+                                                                <p class="text-muted font-size-13">Compañero</p>
+                                                                <?php
+                                                            }else{
+                                                                ?>
+                                                                <p class="text-muted font-size-13">Maestro</p>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-5 info-personal">
-                                                <h3>Información Personal</h3>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="mb-3">
-                                                            <label for="name">Nombre del Q:.H:.</label>
-                                                            <input type="name" class="form-control"
-                                                                   value="<?php echo $row['name'] ?>" disabled>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="mb-3">
-                                                            <label for="lastname">Apellido del Q:.H:.</label>
-                                                            <input type="lastname" class="form-control"
-                                                                   value="<?php echo $row['lastname'] ?>" disabled>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="mb-3">
-                                                            <label for="birthday">Fecha de cumpleaños</label>
-                                                            <input type="date" class="form-control"
-                                                                   value="<?php echo $row['date_birthday'] ?>" disabled>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="mb-3">
-                                                            <label for="phone">Teléfono</label>
-                                                            <input type="phone" class="form-control"
-                                                                   value="+56<?php echo $row['phone'] ?>" disabled>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="email">Email</label>
-                                                    <input type="email" class="form-control"
-                                                           value="<?php echo $row['useremail'] ?>" disabled>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="city">Ciudad</label>
-                                                    <input type="address" class="form-control"
-                                                           value="<?php echo $row['city'] ?>" disabled>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="address">Dirección</label>
-                                                    <input type="address" class="form-control"
-                                                           value="<?php echo $row['address'] ?>" disabled>
-                                                </div>
+                                            <div class="col-sm-auto order-1 order-sm-2">
+                                                <div class="d-flex align-items-start justify-content-end gap-2">
 
-                                            </div>
-                                            <div class="col-5 info-personal">
-                                                <h3>Datos Masonicos</h3>
-                                                <div class="mb-3">
-                                                    <label for="grado">Grado</label>
-                                                    <?php
-                                                    if ($row['grado'] == 1) {
-                                                        ?>
-                                                        <input type="grado" class="form-control" value="Aprendiz"
-                                                               disabled>
-                                                        <?php
-                                                    } elseif ($row['grado'] == 2) {
-                                                        ?>
-                                                        <input type="grado" class="form-control" value="Compañero"
-                                                               disabled>
-                                                        <?php
-                                                    } else {
-                                                        ?>
-                                                        <input type="grado" class="form-control" value="Maestro"
-                                                               disabled>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="oficial">Cargo en la Oficialidad</label>
-                                                    <?php
-                                                    if ($row['oficialidad'] == 1) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control" value="Ninguno"
-                                                               disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 2) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Venerable Maestro" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 3) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Primer Vigilante" disabled>
-
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 4) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Segundo Vigilante" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 5) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Orador" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 6) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Secretario" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 7) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Tesorero" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 8) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Hospitalario" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 9) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Maestro de Ceremonia" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 10) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Maestro Experto" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 11) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Guarda Templo" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 12) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Maestro de Banquetes" disabled>
-                                                        <?php
-                                                    } elseif ($row['oficialidad'] == 13) {
-                                                        ?>
-                                                        <input type="oficial" class="form-control"
-                                                               value="Maestro de Armonía" disabled>
-                                                        <?php
-                                                    }
-                                                    ?>
-
-
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="initiation">Fecha de Iniciación</label>
-                                                    <input type="date" class="form-control"
-                                                           value="<?php echo $row['date_initiation'] ?>" disabled>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="salario">Fecha de Aumento de Salario</label>
-                                                    <input type="date" class="form-control"
-                                                           value="<?php echo $row['date_salary'] ?>" disabled>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="salario">Fecha de Exaltación</label>
-                                                    <input type="date" class="form-control"
-                                                           value="<?php echo $row['date_exalted'] ?>" disabled>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <ul class="nav nav-tabs-custom card-header-tabs border-top mt-4" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link px-3 active" data-bs-toggle="tab" href="#publications" role="tab">Publicaciones</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link px-3" data-bs-toggle="tab" href="#about" role="tab">Información General</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link px-3 " data-bs-toggle="tab" href="#overview" role="tab">Trazados</a>
+                                            </li>
+                                        </ul>
                                     </div>
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                                <div class="tab-content">
+
+                                    <div class="tab-pane active" id="publications" role="tabpanel">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Publicaciones</h5>
+                                            </div>
+                                            <div class="card-body">
+
+                                            </div>
+                                            <!-- end card body -->
+                                        </div>
+                                        <!-- end card -->
+                                    </div>
+
+                                    <div class="tab-pane" id="about" role="tabpanel">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Información General</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <table class="table tabla-perfil">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><b>Nombre:</b></td>
+                                                                <td><?php echo $row['name']; ?> <?php echo $row['lastname']; ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Fecha de Nacimiento:</b></td>
+                                                                <td><?php echo date("d/m/Y", strtotime($row['date_birthday'])); ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Email:</b></td>
+                                                                <td><?php echo $row['useremail']; ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Teléfono:</b></td>
+                                                                <td><?php echo $row['phone']; ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Ciudad:</b></td>
+                                                                <td><?php echo $row['city']; ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Dirección:</b></td>
+                                                                <td><?php echo $row['address']; ?></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <table class="table tabla-perfil">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><b>Grado:</b></td>
+                                                                <?php
+                                                                if ($row['grado'] == 1){
+                                                                    ?>
+                                                                    <td>Aprendiz</td>
+                                                                    <?php
+                                                                }elseif ($row['grado'] == 2){
+                                                                    ?>
+                                                                    <td>Compañero</td>
+                                                                    <?php
+                                                                }else{
+                                                                    ?>
+                                                                    <td>Maestro</td>
+                                                                    <?php
+                                                                }
+                                                                ?>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Cargo en la Oficialidad:</b></td>
+                                                                <?php
+                                                                if ($row['oficialidad'] == 1) {
+                                                                    ?>
+                                                                    <td>Ninguno</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 2) {
+                                                                    ?>
+                                                                    <td>Venerable Maestro</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 3) {
+                                                                    ?>
+                                                                    <td>Primer Vigilante</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 4) {
+                                                                    ?>
+                                                                    <td>Segundo Vigilante</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 5) {
+                                                                    ?>
+                                                                    <td>Orador</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 6) {
+                                                                    ?>
+                                                                    <td>Secretario</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 7) {
+                                                                    ?>
+                                                                    <td>Tesorero</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 8) {
+                                                                    ?>
+                                                                    <td>Hospitalario</td>
+
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 9) {
+                                                                    ?>
+                                                                    <td>Maestro de Ceremonia</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 10) {
+                                                                    ?>
+                                                                    <td>Maestro Experto</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 11) {
+                                                                    ?>
+                                                                    <td>Guarda Templo</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 12) {
+                                                                    ?>
+                                                                    <td>Maestro de Banquetes</td>
+                                                                    <?php
+                                                                } elseif ($row['oficialidad'] == 13) {
+                                                                    ?>
+                                                                    <td>Maestro de Armonía</td>
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Fecha de Iniciación:</b></td>
+                                                                <td><?php echo date("d/m/Y", strtotime($row['date_initiation'])); ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Fecha de Aumento de Salario:</td>
+                                                                <?php
+                                                                if ($row['grado'] == 1){
+                                                                    ?>
+
+                                                                    <?php
+                                                                }elseif ($row['grado'] == 2){
+                                                                    ?>
+                                                                    <td><?php echo date("d/m/Y", strtotime($row['date_salary'])); ?></td>
+                                                                    <?php
+                                                                }else{
+                                                                    ?>
+                                                                    <td><?php echo date("d/m/Y", strtotime($row['date_salary'])); ?></td>
+                                                                    <?php
+                                                                }
+                                                                ?>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Fecha de Exaltación:</td>
+                                                                <?php
+                                                                if ($row['grado'] == 3){
+                                                                    ?>
+                                                                    <td><?php echo date("d/m/Y", strtotime($row['date_exalted'])); ?></td>
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end card body -->
+                                        </div>
+                                        <!-- end card -->
+                                    </div>
+
+                                    <div class="tab-pane " id="overview" role="tabpanel">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Trazados</h5>
+                                            </div>
+                                            <div class="card-body">
+
+                                            </div>
+                                            <!-- end card body -->
+                                        </div>
+                                        <!-- end card -->
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+
+                        
                     </div>
                 </div>
                 <?php include 'layouts/footer.php'; ?>

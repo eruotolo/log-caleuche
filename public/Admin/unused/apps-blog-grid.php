@@ -52,7 +52,7 @@
                                     <div>
                                         <ul class="nav nav-pills">
                                             <li class="nav-item">
-                                                <a class="nav-link" href="apps-blog-list.php" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
+                                                <a class="nav-link" href="../apps-blog-list.php" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link active" href="apps-blog-grid.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid"><i class="bx bx-grid-alt"></i></a>

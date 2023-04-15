@@ -1,6 +1,9 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-
+<?php include ('layouts/config.php');?>
+<?php
+    $id_user = $_SESSION['id'];
+ ?>
 <head>
     
     <title><?php echo $titulo ?> | Perfil</title>
@@ -33,7 +36,7 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="apps-contacts-list.php">Perfil Personal</a></li>
-                                    <li class="breadcrumb-item active">Editar información Personal</li>
+                                    <li class="breadcrumb-item active">Información Personal</li>
                                 </ol>
                             </div>
 
@@ -54,7 +57,7 @@
                                                     <img src="uploads/usuarios/<?php echo $_SESSION['image']; ?>" alt="" class="img-fluid rounded-circle d-block">
                                                 </div>
                                             </div>
-                                            <div class="flex-grow-1">
+                                            <div class="flex-grow-1 item-perfil">
                                                 <div>
                                                     <h5 class="font-size-16 mb-1"><?php echo $_SESSION['name']; ?> <?php echo $_SESSION['lastname']; ?></h5>
                                                     <?php
@@ -72,19 +75,6 @@
                                                     <?php
                                                         }
                                                     ?>
-
-                                                    <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-2 text-muted font-size-13">
-                                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>F. Nacimiento: <b><?php echo date("d/m/Y", strtotime($_SESSION['date_birthday'])); ?></b></div>
-
-                                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>Teléfono: <b><?php echo $_SESSION['phone']; ?></b></div>
-
-                                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>Email: <b><?php echo $_SESSION['useremail']; ?></b></div>
-
-                                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>Ciudad: <b><?php echo $_SESSION['city']; ?></b></div>
-
-                                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>Dirección: <b><?php echo $_SESSION['address']; ?></b></div>
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,18 +82,22 @@
                                     <div class="col-sm-auto order-1 order-sm-2">
                                         <div class="d-flex align-items-start justify-content-end gap-2">
                                             <div>
-                                                <a href="apps-perfile-edit.php" class="btn btn-soft-light"><i class="me-1"></i> Editar</a>
+                                                <a href="apps-perfile-edit.php" class="btn btn-soft-light"><i class="me-1"></i> Editar Perfil</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <ul class="nav nav-tabs-custom card-header-tabs border-top mt-4" id="pills-tab" role="tablist">
+
                                     <li class="nav-item">
-                                        <a class="nav-link px-3 active" data-bs-toggle="tab" href="#overview" role="tab">Trazados</a>
+                                        <a class="nav-link px-3 active" data-bs-toggle="tab" href="#publications" role="tab">Publicaciones</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link px-3" data-bs-toggle="tab" href="#about" role="tab">Publicaciones</a>
+                                        <a class="nav-link px-3" data-bs-toggle="tab" href="#about" role="tab">Información General</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link px-3 " data-bs-toggle="tab" href="#overview" role="tab">Trazados</a>
                                     </li>
                                 </ul>
                             </div>
@@ -111,38 +105,327 @@
                         </div>
                         <!-- end card -->
 
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="overview" role="tabpanel">
+                        <div class="tab-content ">
+
+                            <div class="tab-pane active" id="publications" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6">
+                                                <h5 class="card-title mb-0">Publicaciones</h5>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="d-flex flex-wrap align-items-center justify-content-end ">
+                                                    <div>
+                                                        <a href="apps-blogpost-new.php" class="btn btn-light"><i class="bx bx-plus me-1"></i> Nuevo Post</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive mb-4">
+                                            <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%; margin-bottom: 80px">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check font-size-16">
+                                                            <input type="checkbox" class="form-check-input" id="checkAll">
+                                                            <label class="form-check-label" for="checkAll"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">Titulo del Post</th>
+                                                    <th scope="col">Autor Trazado</th>
+                                                    <th scope="col">Fecha Trazado</th>
+                                                    <th style="width: 80px; min-width: 80px;">Acción</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php
+                                                $query ="SELECT * FROM feed
+                                                        JOIN categoryfeed c on c.id_Category = feed.category_Feed
+                                                        JOIN users u on u.id = feed.user_Feed
+                                                        WHERE u.id = $id_user";
+                                                $result_task = mysqli_query($link, $query);
+                                                while ($row = mysqli_fetch_Array($result_task))  {
+
+                                                    ?>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <div class="form-check font-size-16">
+                                                                <input type="checkbox" class="form-check-input" id="contacusercheck1">
+                                                                <label class="form-check-label" for="contacusercheck1"></label>
+                                                            </div>
+                                                        </th>
+                                                        <td><b><?php echo $row['titulo_Feed'] ?></b></td>
+                                                        <td><?php echo $row['name'] ?> <?php echo $row['lastname'] ?></td>
+                                                        <td><?php echo date("d/m/Y", strtotime($row['created_at'])); ?></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li><a class="dropdown-item" href="apps-trazado-view.php?id_Trazado=<?php echo $row['id_Trazado'] ?>">Ver</a></li>
+                                                                    <li><a class="dropdown-item" href="../admin/controller/trazado-remove.php?id_Trazado=<?php echo $row['id_Trazado'] ?>">Eliminar</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    <?php
+                                                }
+                                                ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                            </div>
+
+                            <div class="tab-pane" id="about" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Información General</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <table class="table tabla-perfil">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><b>Nombre:</b></td>
+                                                            <td><?php echo $_SESSION['name']; ?> <?php echo $_SESSION['lastname']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Fecha de Nacimiento:</b></td>
+                                                            <td><?php echo date("d/m/Y", strtotime($_SESSION['date_birthday'])); ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Email:</b></td>
+                                                            <td><?php echo $_SESSION['useremail']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Teléfono:</b></td>
+                                                            <td><?php echo $_SESSION['phone']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Ciudad:</b></td>
+                                                            <td><?php echo $_SESSION['city']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Dirección:</b></td>
+                                                            <td><?php echo $_SESSION['address']; ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-5">
+                                                <table class="table tabla-perfil">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><b>Grado:</b></td>
+                                                            <?php
+                                                                if ($_SESSION['grado'] == 1){
+                                                                    ?>
+                                                                    <td>Aprendiz</td>
+                                                                    <?php
+                                                                }elseif ($_SESSION['grado'] == 2){
+                                                                    ?>
+                                                                    <td>Compañero</td>
+                                                                    <?php
+                                                                }else{
+                                                                    ?>
+                                                                    <td>Maestro</td>
+                                                                    <?php
+                                                                }
+                                                            ?>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Cargo en la Oficialidad:</b></td>
+                                                            <?php
+                                                            if ($_SESSION['oficialidad'] == 1) {
+                                                                ?>
+                                                                <td>Ninguno</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 2) {
+                                                                ?>
+                                                                <td>Venerable Maestro</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 3) {
+                                                                ?>
+                                                                <td>Primer Vigilante</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 4) {
+                                                                ?>
+                                                                <td>Segundo Vigilante</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 5) {
+                                                                ?>
+                                                                <td>Orador</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 6) {
+                                                                ?>
+                                                                <td>Secretario</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 7) {
+                                                                ?>
+                                                                <td>Tesorero</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 8) {
+                                                                ?>
+                                                                <td>Hospitalario</td>
+
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 9) {
+                                                                ?>
+                                                                <td>Maestro de Ceremonia</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 10) {
+                                                                ?>
+                                                                <td>Maestro Experto</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 11) {
+                                                                ?>
+                                                                <td>Guarda Templo</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 12) {
+                                                                ?>
+                                                                <td>Maestro de Banquetes</td>
+                                                                <?php
+                                                            } elseif ($_SESSION['oficialidad'] == 13) {
+                                                                ?>
+                                                                <td>Maestro de Armonía</td>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Fecha de Iniciación:</b></td>
+                                                            <td><?php echo date("d/m/Y", strtotime($_SESSION['date_initiation'])); ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Fecha de Aumento de Salario:</td>
+                                                            <?php
+                                                                if ($_SESSION['grado'] == 1){
+                                                                    ?>
+
+                                                                    <?php
+                                                                }elseif ($_SESSION['grado'] == 2){
+                                                                    ?>
+                                                                    <td><?php echo date("d/m/Y", strtotime($_SESSION['date_salary'])); ?></td>
+                                                                    <?php
+                                                                }else{
+                                                                    ?>
+                                                                    <td><?php echo date("d/m/Y", strtotime($_SESSION['date_salary'])); ?></td>
+                                                                    <?php
+                                                                }
+                                                            ?>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Fecha de Exaltación:</td>
+                                                            <?php
+                                                                if ($_SESSION['grado'] == 3){
+                                                            ?>
+                                                                    <td><?php echo date("d/m/Y", strtotime($_SESSION['date_exalted'])); ?></td>
+                                                            <?php
+                                                                }
+                                                            ?>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                            </div>
+
+                            <div class="tab-pane mb-5" id="overview" role="tabpanel">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="card-title mb-0">Trazados</h5>
                                     </div>
                                     <div class="card-body">
+                                        <div class="table-responsive mb-4">
+                                            <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%; margin-bottom: 80px">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check font-size-16">
+                                                            <input type="checkbox" class="form-check-input" id="checkAll">
+                                                            <label class="form-check-label" for="checkAll"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">Nombre Trazado</th>
+                                                    <th scope="col">Autor Trazado</th>
+                                                    <th scope="col">Fecha Trazado</th>
+                                                    <th style="width: 80px; min-width: 80px;">Acción</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php
+                                                $query ="SELECT * FROM trazado T
+                                                         JOIN grado G on T.grado_Trazado = G.id
+                                                         JOIN users U on T.autor_Trazado = U.id
+                                                         WHERE U.id = $id_user";
+                                                $result_task = mysqli_query($link, $query);
+                                                while ($row = mysqli_fetch_Array($result_task))  {
 
+                                                    ?>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <div class="form-check font-size-16">
+                                                                <input type="checkbox" class="form-check-input" id="contacusercheck1">
+                                                                <label class="form-check-label" for="contacusercheck1"></label>
+                                                            </div>
+                                                        </th>
+                                                        <td><b><?php echo $row['name_Trazado'] ?></b></td>
+                                                        <td><?php echo $row['name'] ?> <?php echo $row['lastname'] ?></td>
+                                                        <td><?php echo date("d/m/Y", strtotime($row['fecha_Trazado'])); ?></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li><a class="dropdown-item" href="apps-trazado-view.php?id_Trazado=<?php echo $row['id_Trazado'] ?>">Ver</a></li>
+
+                                                                    <?php
+                                                                    if ($_SESSION['category'] == 2 || $_SESSION['username'] == 'eruotolo'){
+                                                                        ?>
+                                                                        <li><a class="dropdown-item" href="../admin/controller/trazado-remove.php?id_Trazado=<?php echo $row['id_Trazado'] ?>">Eliminar</a></li>
+                                                                        <?php
+                                                                    } else{
+                                                                        ?>
+                                                                        <li><a class="dropdown-item disabled" href="#">Eliminar</a></li>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    <?php
+                                                }
+                                                ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <!-- end card body -->
                                 </div>
                                 <!-- end card -->
 
                             </div>
-                            <!-- end tab pane -->
 
-                            <div class="tab-pane" id="about" role="tabpanel">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Publicaciones</h5>
-                                    </div>
-                                    <div class="card-body">
-
-                                    </div>
-                                    <!-- end card body -->
-                                </div>
-                                <!-- end card -->
-                            </div>
-                            <!-- end tab pane -->
-
-
-                            <!-- end tab pane -->
                         </div>
                         <!-- end tab content -->
                     </div>

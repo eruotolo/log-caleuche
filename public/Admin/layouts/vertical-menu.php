@@ -142,6 +142,23 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
+                        <i class='bx bx-calendar'></i>
+                        <span data-key="t-news"><?php echo $language["Calendar"]; ?></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="apps-evento-list.php" data-key="t-news-list"><?php echo $language["Calendar_List"]; ?></a></li>
+                        <?php
+                        if ($_SESSION['category'] == 2 || $_SESSION['category'] == 1) {
+                            ?>
+                            <li><a href="apps-evento-new.php" data-key="t-news-new"><?php echo $language["Calendar_New"]; ?></a></li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="users"></i>
                         <span data-key="t-authentication"><?php echo $language["Authentication"]; ?></span>
                     </a>

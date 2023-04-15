@@ -49,7 +49,7 @@
                                                 <h4>Beautiful Day with Friends</h4>
                                             </div>
                                             <div class="mb-4">
-                                                <img src="../assets/images/small/img-2.jpg" alt="" class="img-thumbnail mx-auto d-block">
+                                                <img src="assets/images/small/img-2.jpg" alt="" class="img-thumbnail mx-auto d-block">
                                             </div>
 
                                             <div class="text-center">
@@ -150,7 +150,7 @@
                                                         <div class="d-flex py-3 border-top">
                                                             <div class="flex-shrink-0 me-3">
                                                                 <div class="avatar-xs">
-                                                                    <img src="../assets/images/users/avatar-2.jpg" alt="" class="img-fluid d-block rounded-circle">
+                                                                    <img src="assets/images/users/avatar-2.jpg" alt="" class="img-fluid d-block rounded-circle">
                                                                 </div>
                                                             </div>
 
@@ -268,7 +268,7 @@
                                                     <a href="javascript: void(0);" class="list-group-item text-muted pb-3 pt-0 px-2">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
-                                                                <img src="../assets/images/small/img-7.jpg" alt="" class="avatar-lg h-auto d-block rounded">
+                                                                <img src="assets/images/small/img-7.jpg" alt="" class="avatar-lg h-auto d-block rounded">
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
                                                                 <h5 class="font-size-13 text-truncate">Beautiful Day with Friends</h5>
@@ -283,7 +283,7 @@
                                                     <a href="javascript: void(0);" class="list-group-item text-muted py-3 px-2">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
-                                                                <img src="../assets/images/small/img-2.jpg" alt="" class="avatar-lg h-auto d-block rounded">
+                                                                <img src="assets/images/small/img-2.jpg" alt="" class="avatar-lg h-auto d-block rounded">
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
                                                                 <h5 class="font-size-13 text-truncate">Drawing a sketch</h5>
@@ -298,7 +298,7 @@
                                                     <a href="javascript: void(0);" class="list-group-item text-muted py-3 px-2">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
-                                                                <img src="../assets/images/small/img-6.jpg" alt="" class="avatar-lg h-auto d-block rounded">
+                                                                <img src="assets/images/small/img-6.jpg" alt="" class="avatar-lg h-auto d-block rounded">
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
                                                                 <h5 class="font-size-13 text-truncate">Project discussion with team</h5>
@@ -313,7 +313,7 @@
                                                     <a href="javascript: void(0);" class="list-group-item text-muted py-3 px-2">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
-                                                                <img src="../assets/images/small/img-1.jpg" alt="" class="avatar-lg h-auto d-block rounded">
+                                                                <img src="assets/images/small/img-1.jpg" alt="" class="avatar-lg h-auto d-block rounded">
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
                                                                 <h5 class="font-size-13 text-truncate">Coffee with friends</h5>
@@ -333,7 +333,7 @@
                                                     <a href="javascript: void(0);" class="list-group-item text-muted pb-3 pt-0 px-2">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
-                                                                <img src="../assets/images/small/img-3.jpg" alt="" class="avatar-xl h-auto d-block rounded">
+                                                                <img src="assets/images/small/img-3.jpg" alt="" class="avatar-xl h-auto d-block rounded">
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
                                                                 <h5 class="font-size-13 text-truncate">Beautiful Day with Friends</h5>
@@ -345,7 +345,7 @@
                                                     <a href="javascript: void(0);" class="list-group-item text-muted py-3 px-2">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
-                                                                <img src="../assets/images/small/img-4.jpg" alt="" class="avatar-xl h-auto d-block rounded">
+                                                                <img src="assets/images/small/img-4.jpg" alt="" class="avatar-xl h-auto d-block rounded">
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
                                                                 <h5 class="font-size-13 text-truncate">Drawing a sketch</h5>
@@ -357,7 +357,7 @@
                                                     <a href="javascript: void(0);" class="list-group-item text-muted py-3 px-2">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
-                                                                <img src="../assets/images/small/img-1.jpg" alt="" class="avatar-xl h-auto d-block rounded">
+                                                                <img src="assets/images/small/img-1.jpg" alt="" class="avatar-xl h-auto d-block rounded">
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
                                                                 <h5 class="font-size-13 text-truncate">Coffee with friends</h5>
@@ -385,12 +385,12 @@
                                             <div class="mt-5">
                                                 <h5 class="mb-3">Instagram Post</h5>
                                                 <div class="gap-2 hstack flex-wrap px-2">
-                                                    <img src="../assets/images/small/img-3.jpg" alt="" class="avatar-xl rounded">
-                                                    <img src="../assets/images/small/img-1.jpg" alt="" class="avatar-xl rounded">
-                                                    <img src="../assets/images/small/img-2.jpg" alt="" class="avatar-xl rounded">
-                                                    <img src="../assets/images/small/img-4.jpg" alt="" class="avatar-xl rounded">
-                                                    <img src="../assets/images/small/img-5.jpg" alt="" class="avatar-xl rounded">
-                                                    <img src="../assets/images/small/img-6.jpg" alt="" class="avatar-xl rounded">
+                                                    <img src="assets/images/small/img-3.jpg" alt="" class="avatar-xl rounded">
+                                                    <img src="assets/images/small/img-1.jpg" alt="" class="avatar-xl rounded">
+                                                    <img src="assets/images/small/img-2.jpg" alt="" class="avatar-xl rounded">
+                                                    <img src="assets/images/small/img-4.jpg" alt="" class="avatar-xl rounded">
+                                                    <img src="assets/images/small/img-5.jpg" alt="" class="avatar-xl rounded">
+                                                    <img src="assets/images/small/img-6.jpg" alt="" class="avatar-xl rounded">
                                                 </div>
                                             </div>
 
@@ -433,7 +433,7 @@
         <?php include 'layouts/vendor-scripts.php'; ?>
 
         <!-- App js -->
-        <script src="../assets/js/app.js"></script>
+        <script src="assets/js/app.js"></script>
 
     </body>
 </html>

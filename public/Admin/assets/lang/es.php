@@ -3,6 +3,8 @@
     $language['Dashboard'] = "Tablero";
     $language['Apps'] = "Aplicaciones";
     $language['Calendar'] = "Calendario";
+    $language['Calendar_List'] = "Listado de Eventos";
+    $language['Calendar_New'] = "Nuevo Eventos";
     $language['Chat'] = "Chat";
     $language['Email'] = "Correo electrónico";
     $language['Inbox'] = "Bandeja de entrada";
